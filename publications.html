@@ -8,38 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Publications 전용 Empty State 스타일 */
-        .empty-state-card {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            padding: 60px 20px;
-            text-align: center;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            margin-top: 24px;
-        }
-
-        .empty-icon {
-            font-size: 2.5rem;
-            margin-bottom: 16px;
-        }
-
-        .empty-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 8px;
-        }
-
-        .empty-description {
-            font-size: 0.95rem;
-            color: #64748b;
-            max-width: 440px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-    </style>
 </head>
 <body>
 
@@ -56,15 +24,15 @@
         </div>
     </header>
 
-    <main class="main-container">
+    <main class="container">
         <section class="section">
-            <h1 class="page-title">Publications</h1>
-            <p class="page-subtitle">Peer-reviewed journal articles, conference papers, and patents.</p>
+            <h1 class="section-title">Publications</h1>
+            <p class="section-subtitle" style="color: #64748b; margin-bottom: 24px;">Peer-reviewed journal articles, conference papers, and patents.</p>
             
-            <div class="empty-state-card">
-                <div class="empty-icon">📚</div>
-                <div class="empty-title">No Publications Yet</div>
-                <p class="empty-description">
+            <div class="card" style="text-align: center; padding: 60px 20px;">
+                <div style="font-size: 2.5rem; margin-bottom: 16px;">📚</div>
+                <h3 style="font-size: 1.25rem; font-weight: 600; color: #1e293b; margin-bottom: 8px;">No Publications Yet</h3>
+                <p style="font-size: 0.95rem; color: #64748b; max-width: 440px; margin: 0 auto; line-height: 1.6;">
                     There are no published papers at the moment. Research outcomes and future publications will be updated here.
                 </p>
             </div>
