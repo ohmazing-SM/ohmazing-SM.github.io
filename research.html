@@ -20,14 +20,14 @@
 
         header { background-color: #ffffff; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; }
         nav { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; }
-        .logo { color: var(--primary-color); font-size: 1.25rem; font-weight: 700; text-decoration: none; }
+        .logo { color: var(--primary-color); font-size: 1.25rem; font-weight: 700; text-decoration: none; letter-spacing: -0.3px; }
         .nav-links { display: flex; list-style: none; gap: 2rem; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
         .nav-links a:hover, .nav-links a.active { color: var(--accent-color); font-weight: 600; }
 
         .container { max-width: 1000px; margin: 2.5rem auto; padding: 0 1.5rem; }
         .card { background: var(--card-bg); padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid var(--border-color); margin-bottom: 2rem; }
-        .section-title { font-size: 1.3rem; color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        .section-title { font-size: 1.25rem; color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
 
         .project-item { margin-bottom: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1.5rem; }
         .project-item:last-child { border-bottom: none; padding-bottom: 0; margin-bottom: 0; }
@@ -60,15 +60,14 @@
     </header>
 
     <main class="container">
-        
         <section class="card">
             <h2 class="section-title">Research Experience</h2>
 
             <!-- KAIST Project -->
             <div class="project-item">
                 <div class="project-header">
-                    <span class="project-title">Metabolic Engineering of E. coli via Genomic Integration</span>
-                    <span class="project-date">2026.06 - 2026.08</span>
+                    <span class="project-title">Metabolic Engineering of Escherichia coli to Expand Malonyl-CoA Pool via Genomic Integration</span>
+                    <span class="project-date">2026.06 – 2026.08</span>
                 </div>
                 <div class="project-lab">Graduate School of Engineering Biology, KAIST (STAR Program)</div>
                 <div class="project-advisor">Advisor: Prof. Sang-Yup Lee</div>
@@ -83,7 +82,7 @@
             <div class="project-item">
                 <div class="project-header">
                     <span class="project-title">De Novo Design of Ligand Peptide</span>
-                    <span class="project-date">2026.03 - 2026.06</span>
+                    <span class="project-date">2026.03 – 2026.06</span>
                 </div>
                 <div class="project-lab">Dept. of Chemical and Biomolecular Engineering, Sogang University</div>
                 <div class="project-advisor">Advisor: Prof. Hyun-Chul Kim</div>
@@ -96,8 +95,8 @@
             <!-- Sogang Biophysical Analysis Project -->
             <div class="project-item">
                 <div class="project-header">
-                    <span class="project-title">Biophysical Analysis of Heliorhodopsin (HeR) - TcR Interaction</span>
-                    <span class="project-date">2025.12 - 2026.02</span>
+                    <span class="project-title">Biophysical Analysis of Heliorhodopsin (HeR) - Transcriptional Regulator (TcR) Interaction</span>
+                    <span class="project-date">2025.12 – 2026.02</span>
                 </div>
                 <div class="project-lab">Dept. of Biological Sciences, Sogang University</div>
                 <div class="project-advisor">Advisor: Prof. Kwang-Hwan Jung</div>
@@ -108,7 +107,6 @@
             </div>
 
         </section>
-
     </main>
 
 </body>
