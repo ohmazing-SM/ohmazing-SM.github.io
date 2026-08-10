@@ -20,26 +20,28 @@
 
         header { background-color: #ffffff; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; }
         nav { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; }
-        .logo { color: var(--primary-color); font-size: 1.25rem; font-weight: 700; text-decoration: none; }
+        .logo { color: var(--primary-color); font-size: 1.25rem; font-weight: 700; text-decoration: none; letter-spacing: -0.3px; }
         .nav-links { display: flex; list-style: none; gap: 2rem; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
         .nav-links a:hover, .nav-links a.active { color: var(--accent-color); font-weight: 600; }
 
         .container { max-width: 1000px; margin: 2.5rem auto; padding: 0 1.5rem; }
         .card { background: var(--card-bg); padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid var(--border-color); margin-bottom: 2rem; }
-        .section-title { font-size: 1.3rem; color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        .section-title { font-size: 1.25rem; color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
 
-        .edu-item { margin-bottom: 1.5rem; }
+        .edu-item { margin-bottom: 1rem; }
         .edu-header { display: flex; justify-content: space-between; align-items: baseline; }
         .degree { font-size: 1.1rem; font-weight: 700; color: var(--primary-color); }
         .date { font-size: 0.9rem; color: var(--accent-color); font-weight: 600; }
         .school { font-size: 0.95rem; font-weight: 600; color: var(--text-main); margin-bottom: 0.5rem; }
         .details { font-size: 0.9rem; color: var(--text-muted); list-style-position: inside; }
+        .details li { margin-bottom: 0.3rem; }
 
-        .skill-group { margin-bottom: 1.2rem; }
-        .skill-title { font-size: 0.95rem; font-weight: 700; color: var(--primary-color); margin-bottom: 0.4rem; }
-        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-        .skill-tag { background: #f1f5f9; color: #475569; padding: 0.25rem 0.6rem; border-radius: 6px; font-size: 0.82rem; font-weight: 500; }
+        .skill-group { margin-bottom: 1.5rem; }
+        .skill-group:last-child { margin-bottom: 0; }
+        .skill-title { font-size: 0.95rem; font-weight: 700; color: var(--primary-color); margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.5px; border-left: 3px solid var(--accent-color); padding-left: 0.5rem; }
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-tag { background: #f1f5f9; color: #334155; padding: 0.3rem 0.7rem; border-radius: 6px; font-size: 0.85rem; font-weight: 500; border: 1px solid #e2e8f0; }
 
         @media (max-width: 768px) { nav { flex-direction: column; gap: 1rem; } .edu-header { flex-direction: column; } }
     </style>
@@ -66,16 +68,16 @@
             <h2 class="section-title">Education</h2>
             <div class="edu-item">
                 <div class="edu-header">
-                    <span class="degree">Undergraduate Student (B.S.)</span>
-                    <span class="date">2023.02 - Present</span>
+                    <span class="degree">Undergraduate Student</span>
+                    <span class="date">2023.02 – Present</span>
                 </div>
                 <div class="school">Sogang University</div>
                 <ul class="details">
                     <li><strong>Major:</strong> Biological Sciences</li>
                     <li><strong>Double Major:</strong> Chemical and Biomolecular Engineering</li>
                     <li><strong>Advisor:</strong> Prof. Kwang-Hwan Jung</li>
-                    <li><strong>CGPA:</strong> 4.12 / 4.30 (Overall) | 4.18 / 4.30 (Major)</li>
-                    <li><strong>Credits:</strong> 106 / 130 credits completed</li>
+                    <li><strong>CGPA:</strong> 4.12 / 4.30 (Overall) &nbsp;|&nbsp; 4.18 / 4.30 (Major)</li>
+                    <li><strong>Credits:</strong> 106 / 130 credits completed (5 semesters)</li>
                 </ul>
             </div>
         </section>
@@ -96,35 +98,54 @@
 
         <!-- Skills Section -->
         <section class="card">
-            <h2 class="section-title">Technical Skills & Equipment</h2>
+            <h2 class="section-title">Skills & Experimental Capabilities</h2>
             
             <div class="skill-group">
                 <div class="skill-title">Experimental Techniques</div>
                 <div class="skill-tags">
                     <span class="skill-tag">Gene Cloning</span>
                     <span class="skill-tag">PCR</span>
+                    <span class="skill-tag">Transformation</span>
+                    <span class="skill-tag">Primer Designing</span>
                     <span class="skill-tag">Genomic Integration (Knock-In/Out)</span>
-                    <span class="skill-tag">Fermenter Culture</span>
+                    <span class="skill-tag">Plasmid Preparation</span>
+                    <span class="skill-tag">Flask-scale Culture</span>
+                    <span class="skill-tag">Fermenter-scale Culture</span>
+                    <span class="skill-tag">Mammalian Cell Subculture</span>
                     <span class="skill-tag">Protein Purification</span>
-                    <span class="skill-tag">Enzyme Kinetics</span>
+                    <span class="skill-tag">Enzyme Kinetics Assay</span>
+                    <span class="skill-tag">Lowry Assay</span>
                     <span class="skill-tag">Western Blotting</span>
+                    <span class="skill-tag">Immunocytochemistry</span>
                     <span class="skill-tag">In vivo Mouse Handling</span>
+                    <span class="skill-tag">Liquid-Liquid Extraction</span>
+                    <span class="skill-tag">Volumetric Titration</span>
                 </div>
             </div>
 
             <div class="skill-group">
-                <div class="skill-title">Analytical Equipment & Devices</div>
+                <div class="skill-title">Analytical Devices & Equipment</div>
                 <div class="skill-tags">
-                    <span class="skill-tag">HPLC (Agilent 1100)</span>
-                    <span class="skill-tag">GC (Agilent 7890A)</span>
-                    <span class="skill-tag">Bench-top Bioreactor (Eppendorf BioFlo 120)</span>
-                    <span class="skill-tag">ITC (MicroCal iTC200)</span>
-                    <span class="skill-tag">Nanodrop One</span>
+                    <span class="skill-tag">HPLC (Agilent Technologies, 1100 Series)</span>
+                    <span class="skill-tag">Microvolume Spectrophotometer (Thermo Scientific, Nanodrop One)</span>
+                    <span class="skill-tag">GC (Agilent Technologies, 7890A GC system)</span>
+                    <span class="skill-tag">Bench-top Bioreactor (Eppendorf, BioFlo 120)</span>
+                    <span class="skill-tag">Sonicator (Qsonica, Q-Series)</span>
+                    <span class="skill-tag">Refrigerated Centrifuges (Hanil Scientific, Combi R515 / Supra 22K)</span>
+                    <span class="skill-tag">Microcentrifuges (Eppendorf, Centrifuge 5425 R)</span>
+                    <span class="skill-tag">PCR Thermal Cycler (Bio-Rad, T100)</span>
+                    <span class="skill-tag">Gel Electrophoresis System (Advance, One)</span>
+                    <span class="skill-tag">Gel Imaging System (VILBER, BIO-PRINT)</span>
+                    <span class="skill-tag">Electroporation System (Bio-Rad Gene Pulser II)</span>
+                    <span class="skill-tag">Autoclave (Lab Companion)</span>
+                    <span class="skill-tag">Isothermal Titration Calorimeter (MicroCal, iTC200)</span>
+                    <span class="skill-tag">pH Meter (Mettler Toledo, SevenDirect SD20)</span>
+                    <span class="skill-tag">Rotary Evaporator (BUCHI, Rotavapor R-114)</span>
                 </div>
             </div>
 
             <div class="skill-group">
-                <div class="skill-title">Computational Tools</div>
+                <div class="skill-title">Computational Tools & Software</div>
                 <div class="skill-tags">
                     <span class="skill-tag">Benchling</span>
                     <span class="skill-tag">RFdiffusion</span>
