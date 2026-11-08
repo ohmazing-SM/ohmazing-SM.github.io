@@ -72,6 +72,20 @@
             margin-bottom: 30px;
         }
 
+        /* 카테고리 섹션 스타일 */
+        .category-section {
+            margin-bottom: 40px;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #111111;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #111111;
+        }
+
         /* 스터디 자료 카드 레이아웃 */
         .study-grid {
             display: flex;
@@ -99,10 +113,10 @@
         }
 
         .study-title {
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             font-weight: 600;
             color: #111111;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .study-desc {
@@ -123,6 +137,8 @@
             font-weight: 500;
             text-decoration: none;
             border-radius: 6px;
+            cursor: pointer;
+            border: none;
             transition: background-color 0.2s;
         }
 
@@ -133,6 +149,20 @@
 
         .btn-primary:hover {
             background-color: #333333;
+        }
+
+        /* PDF 뷰어 영역 (평소엔 숨김) */
+        .pdf-viewer-box {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .pdf-viewer-box iframe {
+            width: 100%;
+            height: 600px;
+            border: 1px solid #eaeaea;
+            border-radius: 6px;
+            background: #ffffff;
         }
 
         /* 반응형 스타일 */
@@ -172,19 +202,65 @@
             <h1>Studies & Reports</h1>
             <p class="subtitle">A collection of my major lab reports, study notes, and technical summaries.</p>
 
-            <div class="study-grid">
-                <!-- 자료 카드 (새로운 글을 올릴 때 이 박스 형태를 복사해서 아래에 붙여넣고 수정하시면 됩니다) -->
-                <div class="study-card">
-                    <div class="study-meta">2026.03 &middot; Molecular Biology Lab</div>
-                    <div class="study-title">Gene Cloning and Protein Expression Analysis Report</div>
-                    <div class="study-desc">Detailed experimental report covering plasmid preparation, PCR verification, and protein purification steps using chromatography.</div>
-                    <div class="study-actions">
-                        <a href="https://drive.google.com/file/d/18RnY7pfn5z21ebdrRY_LlowOGFzACETL/preview" target="_blank" class="btn btn-primary">View / Download PDF</a>
+            <!-- 첫 번째 카테고리: 일반생물학실험I -->
+            <div class="category-section">
+                <h2 class="category-title">일반생물학실험I</h2>
+                <div class="study-grid">
+                    
+                    <!-- 첫 번째 글: 1주차 -->
+                    <div class="study-card">
+                        <div class="study-meta">2026.03 &middot; General Biology Lab I</div>
+                        <div class="study-title">1주차</div>
+                        <div class="study-desc">실험 개요, 이론적 배경 및 기초 실험 프로토콜 정리 레포트입니다.</div>
+                        <div class="study-actions">
+                            <button class="btn btn-primary" onclick="togglePdf('viewer-genbio-1')">View PDF Inside</button>
+                        </div>
+                        <!-- 버튼 클릭 시 아래로 펼쳐지는 PDF 뷰어 영역 -->
+                        <div id="viewer-genbio-1" class="pdf-viewer-box">
+                            <iframe src="https://drive.google.com/file/d/18RnY7pfn5z21ebdrRY_LlowOGFzACETL/preview"></iframe>
+                        </div>
+                    </div>
+
+                    <!-- [추가 방법 안내] 같은 카테고리에 2주차, 3주차를 넣을 때는 위 .study-card 블록을 복사해서 아래에 붙여넣고, 
+                         버튼 안의 함수와 div의 id를 각각 viewer-genbio-2 등으로 다르게 변경해 주시면 됩니다. -->
+
+                </div>
+            </div>
+
+            <!-- [새로운 카테고리 추가 방법 안내] 
+                 아래 블록을 복사해서 위 카테고리 아래에 붙여넣고 카테고리 이름과 내용을 수정하세요.
+            <div class="category-section">
+                <h2 class="category-title">두 번째 카테고리 이름</h2>
+                <div class="study-grid">
+                    <div class="study-card">
+                        <div class="study-meta">2026.XX &middot; Subtitle</div>
+                        <div class="study-title">글 제목 (예: 1주차)</div>
+                        <div class="study-desc">설명 텍스트</div>
+                        <div class="study-actions">
+                            <button class="btn btn-primary" onclick="togglePdf('viewer-cat2-1')">View PDF Inside</button>
+                        </div>
+                        <div id="viewer-cat2-1" class="pdf-viewer-box">
+                            <iframe src="구글_드라이브_프리뷰_링크"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
+            -->
+
         </main>
     </div>
+
+    <!-- PDF 토글 스크립트 -->
+    <script>
+        function togglePdf(id) {
+            var viewer = document.getElementById(id);
+            if (viewer.style.display === "block") {
+                viewer.style.display = "none";
+            } else {
+                viewer.style.display = "block";
+            }
+        }
+    </script>
 
 </body>
 </html>
