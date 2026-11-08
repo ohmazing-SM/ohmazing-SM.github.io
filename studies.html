@@ -19,7 +19,6 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
 
-        /* 상단 네비게이션바 */
         header { background-color: #ffffff; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; }
         nav { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; }
         .logo { color: var(--primary-color); font-size: 1.25rem; font-weight: 700; text-decoration: none; letter-spacing: -0.3px; }
@@ -27,7 +26,6 @@
         .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
         .nav-links a:hover, .nav-links a.active { color: var(--accent-color); font-weight: 600; }
 
-        /* 컨테이너 및 카드 디자인 */
         .container { max-width: 1000px; margin: 2.5rem auto; padding: 0 1.5rem; }
         .card { background: var(--card-bg); padding: 2.5rem 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid var(--border-color); margin-bottom: 2rem; }
         .section-title { font-size: 1.25rem; color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
@@ -38,7 +36,6 @@
             margin-bottom: 1.5rem;
         }
 
-        /* 카테고리 섹션 */
         .category-section {
             margin-bottom: 2rem;
         }
@@ -54,7 +51,6 @@
             border-bottom: 1px solid var(--border-color);
         }
 
-        /* 스터디 자료 카드 */
         .study-grid {
             display: flex;
             flex-direction: column;
@@ -93,7 +89,6 @@
             margin-bottom: 1.2rem;
         }
 
-        /* 버튼 스타일 */
         .btn {
             display: inline-block;
             padding: 0.5rem 1rem;
@@ -111,11 +106,10 @@
             background-color: #1d4ed8;
         }
 
-        /* PDF 뷰어 영역 (아코디언) */
         .pdf-viewer-box {
-            display: none;
             margin-top: 1.2rem;
         }
+        .pdf-viewer-box[hidden] { display: none !important; }
 
         .pdf-viewer-box iframe {
             width: 100%;
@@ -128,9 +122,7 @@
         @media (max-width: 768px) { 
             nav { flex-direction: column; gap: 1rem; } 
         }
-    
 
-        /* Keep header/body alignment and scrollbar spacing consistent on every page. */
         html { overflow-y: scroll; }
         body { overflow-wrap: anywhere; }
         nav { padding: 1.2rem 1.5rem; gap: 1.25rem; }
@@ -161,87 +153,150 @@
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
         }
-
+        .category-section { border: 1px solid var(--border-color); border-radius: 10px; overflow: hidden; margin-bottom: 1rem; }
+        .category-section:last-of-type { margin-bottom: 0; }
+        .category-summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.1rem 1.25rem; background: #f8fafc; }
+        .category-summary::-webkit-details-marker { display: none; }
+        .category-summary::marker { content: ''; }
+        .category-summary:hover { background: #eff6ff; }
+        .category-section[open] > .category-summary { border-bottom: 1px solid var(--border-color); }
+        .category-name { display: block; font-size: 1.05rem; font-weight: 700; color: var(--primary-color); }
+        .category-subtitle { display: block; font-size: 0.8rem; color: #64748b; margin-top: 0.2rem; }
+        .category-action { flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; background: #ffffff; border: 1px solid var(--border-color); color: #2563eb; }
+        .category-chevron { display: inline-block; font-size: 1.2rem; line-height: 1; transition: transform 0.2s; }
+        .category-section[open] .category-chevron { transform: rotate(180deg); }
+        .category-section > .study-grid { padding: 1.25rem; }
+        .study-card { box-shadow: none; border-radius: 8px; }
+        .study-card:hover { transform: none; box-shadow: none; }
+        .pdf-viewer-box iframe { display: block; height: min(700px, 75vh); min-height: 320px; }
+        @media (max-width: 600px) {
+            .category-summary { padding: 1rem; }
+            .category-section > .study-grid { padding: 0.75rem; }
+            .study-card { padding: 1rem; }
+        }
 </style>
 </head>
 <body>
-<!-- 상단 네비게이션바 -->
+
 <header>
 <nav aria-label="Main navigation">
 <a class="logo" href="index.html">Seung-Mok Oh</a>
 <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="education.html">Education</a></li><li><a href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="extracurricular.html">Extracurricular</a></li><li><a aria-current="page" class="active" href="studies.html">Studies</a></li></ul>
 </nav>
 </header>
-<!-- 메인 본문 -->
+
 <main class="container">
 <section class="card">
 <h1 class="section-title">Studies &amp; Reports</h1>
 <p class="subtitle">A collection of my major lab reports, study notes, and technical summaries.</p>
-<!-- 첫 번째 카테고리: 일반생물학실험I -->
-<div class="category-section">
-<h3 class="category-title">일반생물학실험I</h3>
+
+<details class="category-section" lang="ko">
+<summary class="category-summary">
+
+<span class="category-heading">
+<span class="category-name">일반생물학실험I</span>
+<span class="category-subtitle">General Biology Lab I</span>
+</span>
+<span aria-hidden="true" class="category-action"><span class="category-chevron">⌄</span></span>
+</summary>
 <div class="study-grid">
-<!-- 첫 번째 글: 1주차 -->
-<div class="study-card">
-<div class="study-meta">2026.03 · General Biology Lab I</div>
-<div class="study-title">1주차</div>
-<div class="study-desc">실험 개요, 이론적 배경 및 기초 실험 프로토콜 정리 레포트입니다.</div>
-<div>
-<button aria-controls="viewer-genbio-1" aria-expanded="false" class="btn" onclick="togglePdf('viewer-genbio-1')" type="button">View PDF Inside</button>
+
+<article class="study-card" lang="ko">
+
+<p class="study-meta">2026.03 · General Biology Lab I</p>
+
+<h3 class="study-title">1주차</h3>
+
+<p class="study-desc">실험 개요, 이론적 배경 및 기초 실험 프로토콜 정리 레포트입니다.</p>
+
+<button aria-expanded="false" class="btn" onclick="togglePdf(this)" type="button">View PDF Inside</button>
+<div class="pdf-viewer-box" hidden="">
+
+<iframe allowfullscreen="" data-src="https://drive.google.com/file/d/18RnY7pfn5z21ebdrRY_LlowOGFzACETL/preview" loading="lazy" title="General Biology Lab I — 1주차 PDF"></iframe>
 </div>
-<div class="pdf-viewer-box" id="viewer-genbio-1">
-<iframe src="https://drive.google.com/file/d/18RnY7pfn5z21ebdrRY_LlowOGFzACETL/preview" title="General Biology Lab I — Week 1 report"></iframe>
+</article>
+
+<article class="study-card" lang="ko">
+
+<p class="study-meta">2026.03 · General Biology Lab I</p>
+
+<h3 class="study-title">2주차</h3>
+
+<p class="study-desc">2주차 실험 레포트입니다.</p>
+
+<button aria-expanded="false" class="btn" onclick="togglePdf(this)" type="button">View PDF Inside</button>
+<div class="pdf-viewer-box" hidden="">
+
+<iframe allowfullscreen="" data-src="https://drive.google.com/file/d/18RnY7pfn5z21ebdrRY_LlowOGFzACETL/preview" loading="lazy" title="General Biology Lab I — 2주차 PDF"></iframe>
 </div>
+</article>
+
 </div>
-<!-- [두 번째 글(2주차 등) 추가 방법]
-                         아래 .study-card 블록을 복사해서 바로 아래에 붙여넣고, 
-                         onclick 안의 함수 이름과 div의 id를 고유한 이름(예: viewer-genbio-2)으로 변경한 뒤 내용과 링크를 수정하세요.
-                    <div class="study-card">
-                        <div class="study-meta">2026.03 &middot; General Biology Lab I</div>
-                        <div class="study-title">2주차</div>
-                        <div class="study-desc">2주차 실험 레포트 설명 텍스트</div>
-                        <div>
-                            <button class="btn" onclick="togglePdf('viewer-genbio-2')">View PDF Inside</button>
-                        </div>
-                        <div id="viewer-genbio-2" class="pdf-viewer-box">
-                            <iframe src="구글_드라이브_링크/preview"></iframe>
-                        </div>
-                    </div>
-                    -->
+</details>
+
+<details class="category-section" lang="ko">
+<summary class="category-summary">
+
+<span class="category-heading">
+<span class="category-name">일반생물학실험II</span>
+<span class="category-subtitle">General Biology Lab II</span>
+</span>
+<span aria-hidden="true" class="category-action"><span class="category-chevron">⌄</span></span>
+</summary>
+<div class="study-grid">
+
+<article class="study-card" lang="ko">
+
+<p class="study-meta">General Biology Lab II</p>
+
+<h3 class="study-title">1주차</h3>
+
+<p class="study-desc">1주차 실험 레포트입니다.</p>
+
+<button aria-expanded="false" class="btn" onclick="togglePdf(this)" type="button">View PDF Inside</button>
+<div class="pdf-viewer-box" hidden="">
+
+<iframe allowfullscreen="" data-src="https://drive.google.com/file/d/18RnY7pfn5z21ebdrRY_LlowOGFzACETL/preview" loading="lazy" title="General Biology Lab II — 1주차 PDF"></iframe>
 </div>
+</article>
+
+<article class="study-card" lang="ko">
+
+<p class="study-meta">General Biology Lab II</p>
+
+<h3 class="study-title">2주차</h3>
+
+<p class="study-desc">2주차 실험 레포트입니다.</p>
+
+<button aria-expanded="false" class="btn" onclick="togglePdf(this)" type="button">View PDF Inside</button>
+<div class="pdf-viewer-box" hidden="">
+
+<iframe allowfullscreen="" data-src="https://drive.google.com/file/d/18RnY7pfn5z21ebdrRY_LlowOGFzACETL/preview" loading="lazy" title="General Biology Lab II — 2주차 PDF"></iframe>
 </div>
-<!-- [새로운 카테고리 추가 방법]
-                 아래 .category-section 전체를 복사해서 위 카테고리 아래에 붙여넣고 카테고리 이름과 내부 카드를 수정하세요.
-            <div class="category-section" style="margin-top: 2rem;">
-                <h3 class="category-title">새로운 과목/카테고리 이름</h3>
-                <div class="study-grid">
-                    <div class="study-card">
-                        <div class="study-meta">2026.04 &middot; Subtitle</div>
-                        <div class="study-title">1주차</div>
-                        <div class="study-desc">설명 텍스트</div>
-                        <div>
-                            <button class="btn" onclick="togglePdf('viewer-cat2-1')">View PDF Inside</button>
-                        </div>
-                        <div id="viewer-cat2-1" class="pdf-viewer-box">
-                            <iframe src="구글_드라이브_링크/preview"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            -->
+</article>
+
+</div>
+</details>
+
 </section>
 </main>
-<!-- PDF 토글 스크립트 -->
+
 <script>
-        function togglePdf(id) {
-            var viewer = document.getElementById(id);
+        function togglePdf(button) {
+            var card = button.closest('.study-card');
+            if (!card) return;
+            var viewer = card.querySelector('.pdf-viewer-box');
             if (!viewer) return;
-            var isOpen = viewer.style.display === "block";
-            viewer.style.display = isOpen ? "none" : "block";
-            var button = document.querySelector('[aria-controls="' + id + '"]');
-            if (button) {
-                button.setAttribute("aria-expanded", String(!isOpen));
+            var willOpen = viewer.hidden;
+            if (willOpen) {
+                var frame = viewer.querySelector('iframe[data-src]');
+                if (frame && !frame.getAttribute('src')) {
+                    frame.setAttribute('src', frame.getAttribute('data-src'));
+                }
             }
+            viewer.hidden = !willOpen;
+            button.setAttribute('aria-expanded', String(willOpen));
+            button.textContent = willOpen ? 'Hide PDF' : 'View PDF Inside';
         }
     </script>
 </body>
