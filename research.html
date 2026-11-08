@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Experience | Seung-Mok Oh</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Research Experience | Seung-Mok Oh</title>
+<style>
         /* 스크롤바 축 고정 (화면 덜컥거림 방지) */
         html {
             overflow-y: scroll;
@@ -79,69 +80,105 @@
             .project-header { flex-direction: column; gap: 0.3rem; } 
             .project-date { white-space: normal; }
         }
-    </style>
+    
+
+        /* Keep header/body alignment and scrollbar spacing consistent on every page. */
+        html { overflow-y: scroll; }
+        body { overflow-wrap: anywhere; }
+        nav { padding: 1.2rem 1.5rem; gap: 1.25rem; }
+        .logo { flex-shrink: 0; }
+        .nav-links { flex-wrap: wrap; justify-content: flex-end; column-gap: 1.15rem; row-gap: 0.5rem; }
+        .nav-links a { display: inline-block; white-space: nowrap; }
+        .home-grid { grid-template-columns: 300px minmax(0, 1fr); }
+        a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent-color); outline-offset: 4px; border-radius: 3px; }
+        .project-title { margin: 0; line-height: 1.5; }
+        .project-role { font-size: 0.88rem; color: var(--text-muted); margin: 0.35rem 0 0.15rem; }
+        .project-status { display: inline-block; color: #1d4ed8; background: #eff6ff; border: 1px solid #dbeafe; font-size: 0.76rem; font-weight: 600; padding: 0.12rem 0.5rem; border-radius: 4px; margin-bottom: 0.75rem; }
+        @media (max-width: 940px) {
+            nav { flex-direction: column; gap: 0.85rem; }
+            .nav-links { justify-content: center; }
+        }
+        @media (max-width: 768px) {
+            .home-grid { grid-template-columns: minmax(0, 1fr); }
+        }
+        @media (max-width: 600px) {
+            nav { padding: 1rem 1.25rem; }
+            .nav-links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; gap: 0.6rem 0.35rem; text-align: center; }
+            .nav-links a { font-size: 0.82rem; }
+            .container { margin-top: 1.5rem; padding: 0 1.25rem; }
+            .card, .content-card { padding: 1.35rem; }
+            .project-header { flex-direction: column; gap: 0.3rem; }
+            .project-date { white-space: normal; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
+        }
+
+</style>
 </head>
 <body>
+<header>
+<nav aria-label="Main navigation">
+<a class="logo" href="index.html">Seung-Mok Oh</a>
+<ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="education.html">Education</a></li><li><a aria-current="page" class="active" href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="extracurricular.html">Extracurricular</a></li><li><a href="studies.html">Studies</a></li></ul>
+</nav>
+</header>
+<main class="container">
+<section class="card">
+<h1 class="section-title">Research Experience</h1>
 
-    <header>
-        <nav>
-            <a href="index.html" class="logo">Seung-Mok Oh</a>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="education.html">Education</a></li>
-                <li><a href="research.html" class="active">Research</a></li>
-                <li><a href="publications.html">Publications</a></li>
-                <li><a href="studies.html">Studies</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="container">
-        <section class="card">
-            <h2 class="section-title">Research Experience</h2>
-
-            <div class="project-item">
-                <div class="project-header">
-                    <span class="project-title">Metabolic Engineering of Escherichia coli to Expand Malonyl-CoA Pool via Genomic Integration</span>
-                    <span class="project-date">2026.06 – 2026.08</span>
-                </div>
-                <div class="project-lab">Graduate School of Engineering Biology, KAIST (STAR Program)</div>
-                <div class="project-advisor">Advisor: <a href="https://mbel.kaist.ac.kr/" target="_blank" class="prof-link">Prof. Sang-Yup Lee</a></div>
-                <ul class="project-bullets">
-                    <li>Integrated <i>Corynebacterium glutamicum</i>-derived Acetyl-CoA Carboxylase subunits (accBC and accD) into the <i>E. coli</i> genome to enhance intracellular Malonyl-CoA availability.</li>
-                    <li>Applied λ-Red recombinase and Cre/loxP site-specific recombination systems to achieve precise, markerless chromosomal knock-in.</li>
-                    <li>Optimized carbon flux toward precursor biosynthesis to overcome bottleneck steps for target natural product overproduction.</li>
-                </ul>
-            </div>
-
-            <div class="project-item">
-                <div class="project-header">
-                    <span class="project-title">De Novo Design of Ligand Peptide</span>
-                    <span class="project-date">2026.03 – 2026.06</span>
-                </div>
-                <div class="project-lab">Dept. of Chemical and Biomolecular Engineering, Sogang University</div>
-                <div class="project-advisor">Advisor: <a href="https://ddssogang.wixsite.com/biomaterials" target="_blank" class="prof-link">Prof. Hyun-Chul Kim</a></div>
-                <ul class="project-bullets">
-                    <li>Designed de novo peptide ligands targeting the extracellular domain of Heliorhodopsin.</li>
-                    <li>Generated candidate ligands using RFdiffusion and evaluated protein-ligand complex structures and binding interfaces via AlphaFold3 and Boltz-2.</li>
-                </ul>
-            </div>
-
-            <div class="project-item">
-                <div class="project-header">
-                    <span class="project-title">Biophysical Analysis of Heliorhodopsin (HeR) - Transcriptional Regulator (TcR) Interaction</span>
-                    <span class="project-date">2025.12 – 2026.02</span>
-                </div>
-                <div class="project-lab">Dept. of Biological Sciences, Sogang University</div>
-                <div class="project-advisor">Advisor: <a href="http://www.photoreceptor.co.kr" target="_blank" class="prof-link">Prof. Kwang-Hwan Jung</a></div>
-                <ul class="project-bullets">
-                    <li>Quantified thermodynamic binding affinities (Kd, ΔH) and molecular interaction between HeR and TcR using Isothermal Titration Calorimetry (ITC).</li>
-                    <li>Engineered a synthetic transcriptional gene circuit by inserting a constitutive Helix-Turn-Helix (HTH) promoter upstream of the TcR promoter to modulate TcR-mediated repression.</li>
-                </ul>
-            </div>
-
-        </section>
-    </main>
-
+<article class="project-item">
+<div class="project-header">
+<h2 class="project-title">Machine Learning-Based Process Optimization of Custom Dip-Coated Quantum Dot Thin Films</h2>
+<span class="project-date">2026.09 – Present</span>
+</div>
+<p class="project-role">Undergraduate Research Project</p>
+<div class="project-lab">Department of Chemical and Biomolecular Engineering, Sogang University</div>
+<div class="project-advisor">Advisor: Prof. Moon-Sung Kang</div>
+<span class="project-status">In Progress</span>
+<ul class="project-bullets">
+<li>Developing a linear dip-coating system using an actuator, an Arduino-based controller, and custom 3D-printed modular jigs to precisely control dip-coating parameters, including withdrawal speed, substrate angle, dwell time, drying time, and bath temperature.</li>
+<li>Formulating a Latin Hypercube Sampling (LHS) experimental protocol for colloidal quantum dot (cQD) deposition, with plans to optimize process parameters and minimize AFM surface roughness via machine learning regression (in progress).</li>
+</ul>
+</article>
+<article class="project-item">
+<div class="project-header">
+<h2 class="project-title">Metabolic Engineering of Escherichia coli to Expand Malonyl-CoA Pool via Genomic Integration</h2>
+<span class="project-date">2026.06 – 2026.08</span>
+</div><p class="project-role">Lab Internship (KAIST STAR Program)</p>
+<div class="project-lab">Graduate School of Engineering Biology, KAIST</div>
+<div class="project-advisor">Advisor: <a class="prof-link" href="https://mbel.kaist.ac.kr/" rel="noopener noreferrer" target="_blank">Prof. Sang-Yup Lee</a></div>
+<ul class="project-bullets">
+<li>Integrated <i>Corynebacterium glutamicum</i>-derived Acetyl-CoA Carboxylase subunits (accBC and accD) into the <i>E. coli</i> genome to enhance intracellular Malonyl-CoA availability.</li>
+<li>Applied λ-Red recombinase and Cre/loxP site-specific recombination systems to achieve precise, markerless chromosomal knock-in.</li>
+<li>Optimized carbon flux toward precursor biosynthesis to overcome bottleneck steps for target natural product overproduction.</li>
+</ul>
+</article>
+<article class="project-item">
+<div class="project-header">
+<h2 class="project-title">De Novo Design of Ligand Peptide</h2>
+<span class="project-date">2026.03 – 2026.06</span>
+</div><p class="project-role">Undergraduate Research Project</p>
+<div class="project-lab">Department of Chemical and Biomolecular Engineering, Sogang University</div>
+<div class="project-advisor">Advisor: <a class="prof-link" href="https://ddssogang.wixsite.com/biomaterials" rel="noopener noreferrer" target="_blank">Prof. Hyun-Chul Kim</a></div>
+<ul class="project-bullets">
+<li>Designed de novo peptide ligands targeting the extracellular domain of Heliorhodopsin.</li>
+<li>Generated candidate ligands using RFdiffusion and evaluated protein-ligand complex structures and binding interfaces via AlphaFold3 and Boltz-2.</li>
+</ul>
+</article>
+<article class="project-item">
+<div class="project-header">
+<h2 class="project-title">Biophysical Analysis of Heliorhodopsin (HeR) - Transcriptional Regulator (TcR) Interaction</h2>
+<span class="project-date">2025.12 – 2026.02</span>
+</div><p class="project-role">Lab Internship</p>
+<div class="project-lab">Department of Biological Sciences, Sogang University</div>
+<div class="project-advisor">Advisor: <a class="prof-link" href="http://www.photoreceptor.co.kr" rel="noopener noreferrer" target="_blank">Prof. Kwang-Hwan Jung</a></div>
+<ul class="project-bullets">
+<li>Quantified thermodynamic binding affinities (Kd, ΔH) and molecular interaction between HeR and TcR using Isothermal Titration Calorimetry.</li>
+<li>Engineered a synthetic transcriptional gene circuit by inserting a constitutive Helix-Turn-Helix (HTH) promoter upstream of the TcR promoter to modulate TcR-mediated repression.</li>
+</ul>
+</article>
+</section>
+</main>
 </body>
 </html>
