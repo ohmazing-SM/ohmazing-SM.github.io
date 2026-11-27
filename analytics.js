@@ -1,6 +1,6 @@
 // Replace only this placeholder with your GA4 Measurement ID (G-...). Public ID.
 (() => {
-  const MEASUREMENT_ID='G-XXXXXXXXXX';
+  const MEASUREMENT_ID='G-1PEYPYYCVJ';
   if(!/^G-[A-Z0-9]{5,}$/.test(MEASUREMENT_ID)||MEASUREMENT_ID==='G-XXXXXXXXXX') return;
   const KEY='academic-analytics-consent'; let started=false;
   const get=()=>{try{return localStorage.getItem(KEY);}catch{return null;}};
