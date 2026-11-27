@@ -116,6 +116,8 @@
         [hidden] { display:none !important; }
         @media(max-width:600px) { .post-row { flex-direction:column; align-items:flex-start; gap:.25rem; } .form-panel { padding:.9rem; } .article-title { font-size:1.2rem; } }
 </style>
+<link rel="stylesheet" href="board-content.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.css">
 </head>
 <body>
 <header>
@@ -143,12 +145,25 @@
   </form>
   <form id="editor" class="form-panel" hidden><h2 id="editorHeading">Write Post</h2>
     <label class="field">Title<input id="titleInput" maxlength="200" required placeholder="Post title"></label>
-    <label class="field">Content<textarea id="bodyInput" maxlength="50000" required placeholder="Write your post here…"></textarea></label>
-    <div class="board-actions"><button class="btn" id="publishBtn" type="submit">Publish</button><button class="btn secondary" id="cancelEdit" type="button">Cancel</button></div>
+    <label class="field">Category<input id="categoryInput" maxlength="60" value="General" required list="categories"><datalist id="categories"><option value="General"><option value="Research"><option value="Studies"><option value="Personal"></datalist></label>
+    <span class="field" id="contentLabel">Content</span>
+    <div class="rich-tools" id="richTools" role="toolbar" aria-label="Formatting">
+      <select id="blockStyle" aria-label="Paragraph style"><option value="p">Paragraph</option><option value="h2">Heading 1</option><option value="h3">Heading 2</option><option value="h4">Heading 3</option><option value="blockquote">Quote</option><option value="pre">Code</option></select>
+      <select id="fontSize" aria-label="Font size"><option value="3">Normal</option><option value="2">Small</option><option value="4">Large</option><option value="5">Larger</option></select>
+      <button type="button" data-command="bold" title="Bold"><b>B</b></button><button type="button" data-command="italic" title="Italic"><i>I</i></button><button type="button" data-command="underline" title="Underline"><u>U</u></button><button type="button" data-command="strikeThrough" title="Strikethrough"><s>S</s></button>
+      <button type="button" data-command="subscript" title="Subscript">x₂</button><button type="button" data-command="superscript" title="Superscript">x²</button><input type="color" id="fontColor" value="#2563eb" aria-label="Text color">
+      <button type="button" data-command="insertUnorderedList">• List</button><button type="button" data-command="insertOrderedList">1. List</button><button type="button" data-command="justifyLeft">Left</button><button type="button" data-command="justifyCenter">Center</button><button type="button" data-command="justifyRight">Right</button>
+      <button type="button" id="linkTool">Link</button><button type="button" id="imageTool">Image</button><button type="button" id="imageSize">Image size</button><button type="button" id="fileTool">PDF</button><button type="button" id="tableTool">Table</button><button type="button" id="addRow">+ Row</button><button type="button" id="addCol">+ Col</button><button type="button" id="mathTool">∑ Formula</button><button type="button" id="previewTool">Preview</button><button type="button" data-command="undo">Undo</button><button type="button" data-command="redo">Redo</button>
+    </div>
+    <div class="rich-editor rich-content" id="bodyInput" contenteditable="true" role="textbox" aria-multiline="true" aria-labelledby="contentLabel"></div>
+    <input id="mediaFile" type="file" hidden><p class="editor-help">Images: JPG, PNG, WebP, GIF · PDFs · Max 10 MB per file. Select an image to resize it; place the cursor inside a table to add rows or columns. Formulas use LaTeX and render in Preview and published posts.</p>
+    <div id="previewPanel" class="rich-content notice" hidden></div>
+    <div class="board-actions"><button class="btn" id="publishBtn" type="submit">Publish</button><button class="btn secondary" id="saveDraft" type="button">Save Draft</button><button class="btn secondary" id="cancelEdit" type="button">Cancel</button></div>
   </form>
   <section id="listPanel" aria-label="Posts" hidden>
     <label class="field" for="searchInput">Search posts<input type="search" class="search" id="searchInput" placeholder="Search by title" maxlength="100"></label>
     <div class="board-list" id="posts"></div>
+
     <div class="list-footer" id="pagination" hidden><button class="btn secondary" id="prevBtn" type="button">Previous</button><span class="post-meta" id="pageLabel"></span><button class="btn secondary" id="nextBtn" type="button">Next</button></div>
   </section>
   <article id="articlePanel" hidden>
@@ -160,6 +175,11 @@
 </section>
 </main>
 <script src="board-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.4.18/dist/purify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.19.1/dist/katex.min.js"></script>
+<script src="board-content.js"></script>
+<script src="board-views.js"></script>
+<script src="board-editor.js"></script>
 <script src="board.js"></script>
 </body>
 </html>
