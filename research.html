@@ -115,6 +115,15 @@
         }
 
         @media (max-width: 600px) { .nav-links li:last-child { grid-column: 2; } }
+
+        /* Expandable supporting documents */
+        .evidence-toggle { font: inherit; color: inherit; border: 0; padding: 0; background: none; cursor: pointer; text-align: left; }
+        .evidence-label { text-decoration: underline; text-underline-offset: 3px; }
+        .evidence-toggle:hover { color: var(--accent-color); }
+        .evidence-state { display: inline-block; margin-left: 0.45rem; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-decoration: none; }
+        .evidence-viewer { margin-top: 1rem; }
+        .evidence-viewer[hidden] { display: none !important; }
+        .evidence-viewer iframe { display: block; width: 100%; height: min(700px, 75vh); min-height: 320px; border: 1px solid var(--border-color); border-radius: 8px; background: #fff; }
 </style>
 </head>
 <body>
@@ -146,7 +155,7 @@
 <div class="project-header">
 <h2 class="project-title">Metabolic Engineering of Escherichia coli to Expand Malonyl-CoA Pool via Genomic Integration</h2>
 <span class="project-date">2026.06 – 2026.08</span>
-</div><p class="project-role">Lab Internship (KAIST STAR Program)</p>
+</div><p class="project-role">Lab Internship <button type="button" class="evidence-toggle" aria-expanded="false" aria-controls="kaist-star-evidence">(<span class="evidence-label">KAIST STAR Program</span>)<span class="evidence-state" aria-hidden="true">View</span></button></p>
 <div class="project-lab">Graduate School of Engineering Biology, KAIST</div>
 <div class="project-advisor">Advisor: <a class="prof-link" href="https://mbel.kaist.ac.kr/" rel="noopener noreferrer" target="_blank">Prof. Sang-Yup Lee</a></div>
 <ul class="project-bullets">
@@ -154,6 +163,9 @@
 <li>Applied λ-Red recombinase and Cre/loxP site-specific recombination systems to achieve precise, markerless chromosomal knock-in.</li>
 <li>Optimized carbon flux toward precursor biosynthesis to overcome bottleneck steps for target natural product overproduction.</li>
 </ul>
+<div class="evidence-viewer" id="kaist-star-evidence" hidden>
+<iframe data-src="https://drive.google.com/file/d/1zaPOBu5yVb9ApVytqbMtUvRV4l-Xf6M6/preview" title="KAIST STAR Program — supporting document" loading="lazy" allowfullscreen></iframe>
+</div>
 </article>
 <article class="project-item">
 <div class="project-header">
@@ -181,5 +193,21 @@
 </article>
 </section>
 </main>
+<script>
+        document.addEventListener('click', function (event) {
+            const button = event.target.closest('button.evidence-toggle');
+            if (!button) return;
+            const viewer = document.getElementById(button.getAttribute('aria-controls'));
+            if (!viewer) return;
+            const opening = viewer.hidden;
+            if (opening) {
+                const frame = viewer.querySelector('iframe[data-src]');
+                if (frame && !frame.getAttribute('src')) frame.setAttribute('src', frame.dataset.src);
+            }
+            viewer.hidden = !opening;
+            button.setAttribute('aria-expanded', String(opening));
+            button.querySelector('.evidence-state').textContent = opening ? 'Hide' : 'View';
+        });
+</script>
 </body>
 </html>
