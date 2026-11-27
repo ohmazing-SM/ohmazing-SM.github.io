@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Seung-Mok Oh | Home</title>
+<title>Publications | Seung-Mok Oh</title>
 <style>
         :root {
             --primary-color: #1e293b;
@@ -16,197 +16,41 @@
             --border-color: #e2e8f0;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
+        header { background-color: #ffffff; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; }
+        nav { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 2rem; }
+        .logo { color: var(--primary-color); font-size: 1.25rem; font-weight: 700; text-decoration: none; letter-spacing: -0.3px; }
+        .nav-links { display: flex; list-style: none; gap: 2rem; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent-color); font-weight: 600; }
 
-        /* Top Navigation Header */
-        header {
-            background-color: #ffffff;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+        .container { max-width: 1000px; margin: 2.5rem auto; padding: 0 1.5rem; }
+        .card { background: var(--card-bg); padding: 2.5rem 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); border: 1px solid var(--border-color); margin-bottom: 2rem; }
+        .section-title { font-size: 1.25rem; color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
 
-        nav {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 2rem;
-        }
-
-        .logo {
-            color: var(--primary-color);
-            font-size: 1.25rem;
-            font-weight: 700;
-            text-decoration: none;
-            letter-spacing: -0.3px;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        /* Container */
-        .container {
-            max-width: 1000px;
-            margin: 2.5rem auto;
-            padding: 0 1.5rem;
-        }
-
-        /* Home Layout Grid */
-        .home-grid {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 2rem;
-            align-items: start;
-        }
-
-        /* Profile Sidebar */
-        .profile-card {
-            background: var(--card-bg);
-            padding: 2rem 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border-color);
+        .empty-state {
             text-align: center;
-        }
-
-        .avatar {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background-color: #e2e8f0;
-            margin: 0 auto 1.2rem auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.8rem;
-        }
-
-        .profile-card h1 {
-            font-size: 1.35rem;
-            color: var(--primary-color);
-            margin-bottom: 0.3rem;
-        }
-
-        .profile-card .role {
-            font-size: 0.88rem;
+            padding: 3rem 1rem;
             color: var(--text-muted);
-            margin-bottom: 1.2rem;
-            font-weight: 500;
         }
-
-        .info-list {
-            text-align: left;
-            font-size: 0.88rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 1rem;
-        }
-
-        .info-item {
+        .empty-icon {
+            font-size: 2.5rem;
             margin-bottom: 0.8rem;
         }
-
-        .info-label {
-            font-weight: 700;
-            color: var(--primary-color);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: block;
-            margin-bottom: 0.1rem;
-        }
-
-        .info-value a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        /* Main Content Card */
-        .content-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border-color);
-        }
-
-        .section-title {
-            font-size: 1.2rem;
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .bio-text {
-            font-size: 0.95rem;
-            margin-bottom: 2rem;
-            color: #475569;
-            line-height: 1.7;
-        }
-
-        .interest-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tag {
-            background-color: #eff6ff;
-            color: var(--accent-color);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
+        .empty-title {
+            font-size: 1.1rem;
             font-weight: 600;
-            border: 1px solid #dbeafe;
+            color: var(--primary-color);
+            margin-bottom: 0.4rem;
+        }
+        .empty-sub {
+            font-size: 0.9rem;
         }
 
-        @media (max-width: 768px) {
-            .home-grid {
-                grid-template-columns: 1fr;
-            }
-            nav {
-                flex-direction: column;
-                gap: 1rem;
-            }
-        }
-
-
-
-
-
-
-
+        @media (max-width: 768px) { nav { flex-direction: column; gap: 1rem; } }
+    
 
         /* Keep header/body alignment and scrollbar spacing consistent on every page. */
         html { overflow-y: scroll; }
@@ -244,46 +88,21 @@
 </style>
 </head>
 <body>
-<!-- Header Navigation -->
 <header>
 <nav aria-label="Main navigation">
 <a class="logo" href="index.html">Seung-Mok Oh</a>
-<ul class="nav-links"><li><a aria-current="page" class="active" href="index.html">Home</a></li><li><a href="education.html">Education</a></li><li><a href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="extracurricular.html">Extracurricular</a></li><li><a href="studies.html">Studies</a></li><li><a href="board.html">Board</a></li></ul>
+<ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="education.html">Education</a></li><li><a href="research.html">Research</a></li><li><a aria-current="page" class="active" href="publications.html">Publications</a></li><li><a href="extracurricular.html">Extracurricular</a></li><li><a href="studies.html">Studies</a></li><li><a href="board.html">Board</a></li></ul>
 </nav>
 </header>
-<!-- Main Container -->
 <main class="container">
-<div class="home-grid">
-<!-- Profile Sidebar -->
-<aside class="profile-card">
-<div class="avatar">👨‍🔬</div>
-<h1>Seung-Mok Oh</h1>
-<p class="role">Undergraduate Student</p>
-<div class="info-list">
-<div class="info-item">
-<span class="info-label">University</span>
-<span>Sogang University</span>
+<section class="card">
+<h1 class="section-title">Publications</h1>
+<div class="empty-state">
+<div class="empty-icon">📄</div>
+<div class="empty-title">No Publications Yet</div>
+<div class="empty-sub">Research outcomes and peer-reviewed publications will be updated here in the future.</div>
 </div>
-<div class="info-item">
-<span class="info-label">Majors</span>
-<span>Biological Sciences &amp;<br/>Chemical and Biomolecular Eng.</span>
-</div>
-<div class="info-item">
-<span class="info-label">Email</span>
-<span class="info-value"><a href="mailto:osm0824@sogang.ac.kr">osm0824@sogang.ac.kr</a><br/>
-<a href="mailto:biosm0824@naver.com">biosm0824@naver.com</a></span>
-</div>
-</div>
-</aside>
-<!-- Home Content -->
-<section class="content-card">
-<h2 class="section-title">About Me</h2>
-<p class="bio-text">I am an undergraduate student at Sogang University double majoring in Biological Sciences and Chemical and Biomolecular Engineering. My research interests focus on nanotechnology, surface engineering of nanomaterials, and bio-applications of nanoparticles.</p>
-<h2 class="section-title">Research Interests</h2>
-<div class="interest-tags"><span class="tag">Nanotechnology</span><span class="tag">Surface Engineering of Nanomaterials</span><span class="tag">Bio-applications of Nanoparticles</span></div>
-
 </section>
-</div>
 </main>
 </body>
 </html>
