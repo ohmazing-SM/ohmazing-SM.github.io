@@ -1,13 +1,15 @@
 """Build a Pages artifact; all DB requests use the existing public read key, not service_role."""
 import argparse, html, json, re, shutil, urllib.parse, urllib.request, uuid
 from pathlib import Path
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from xml.etree.ElementTree import Element, SubElement, ElementTree
 import bleach
 from bs4 import BeautifulSoup
 
 BASE='https://ohmazing-sm.github.io'
-PAGES=['index.html','education.html','research.html','publications.html','extracurricular.html','studies.html','board.html']
-LABELS=['Home','Education','Research','Publications','Extracurricular','Studies','Board']
+PAGES=['index.html','education.html','research.html','publications.html','extracurricular.html','archive.html','board.html']
+LABELS=['Home','Education','Research','Publications','Extracurricular','Archive','Board']
 TAGS='p div br b strong i em u s strike sub sup h2 h3 h4 ul ol li blockquote pre code a img table thead tbody tr th td span font hr'.split()
 
 def config(root):
@@ -63,6 +65,11 @@ def safe_html(body,url):
     # Re-sanitize the serialized markup; add no untrusted scripts or style attributes.
     return bleach.clean(str(soup),tags=TAGS,attributes=lambda t,n,v: attr(t,n,v) or (t=='img' and n=='loading' and v=='lazy') or (t=='a' and n=='rel' and v=='noopener noreferrer') or (t=='a' and n=='target' and v=='_blank'),protocols=['https'],strip=True,strip_comments=True)
 
+def kst_date(value):
+    dt=datetime.fromisoformat(str(value).replace('Z','+00:00'))
+    if dt.tzinfo is None: dt=dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(ZoneInfo('Asia/Seoul')).date().isoformat()
+
 def esc(s):return html.escape(str(s),quote=True)
 def clean_text(s):return ' '.join(BeautifulSoup(s,'html.parser').get_text(' ',strip=True).split())
 def write(path,content):path.parent.mkdir(parents=True,exist_ok=True);path.write_text(content,encoding='utf-8')
@@ -70,7 +77,7 @@ def build(root,out,fixture=None):
     if out.exists():shutil.rmtree(out)
     out.mkdir(parents=True)
     for item in root.iterdir():
-        if item.name.startswith('.') or item.name in ('scripts','_site','posts','sitemap.xml','robots.txt','privacy.html','node_modules','__pycache__') or item.resolve()==out.resolve() or item.suffix.lower() in ('.sql','.zip','.md','.txt','.py','.yml','.yaml') and item.name not in ('robots.txt',):continue
+        if item.name.startswith('.') or item.name in ('scripts','_site','posts','sitemap.xml','robots.txt','privacy.html','studies.html','node_modules','__pycache__') or item.resolve()==out.resolve() or item.suffix.lower() in ('.sql','.zip','.md','.txt','.py','.yml','.yaml') and item.name not in ('robots.txt',):continue
         if item.is_dir():shutil.copytree(item,out/item.name,ignore=shutil.ignore_patterns('.git','node_modules','.env*','*.sql','*.zip'))
         elif item.is_file():shutil.copy2(item,out/item.name)
     if fixture:
@@ -84,12 +91,14 @@ def build(root,out,fixture=None):
     sitemap=Element('urlset',xmlns='http://www.sitemaps.org/schemas/sitemap/0.9')
     def add(path,last=None):
         node=SubElement(sitemap,'url');SubElement(node,'loc').text=BASE+path
-        if last:SubElement(node,'lastmod').text=str(last)[:10]
+        if last:SubElement(node,'lastmod').text=kst_date(last)
     for name in PAGES:add('/' if name=='index.html' else '/'+name)
     for name in PAGES:
         target=out/name
         text=target.read_text()
-        if name=='board.html': text=text.replace('<div id="setupNotice"','<p class="editor-help"><a href="/posts/">Browse the searchable post archive</a></p><div id="setupNotice"',1)
+        text=text.replace('href="studies.html"', 'href="archive.html"').replace('>Studies</a>', '>Archive</a>')
+        if name=='board.html': text=text.replace('<p class="editor-help"><a href="/posts/">Browse the searchable post archive</a></p>', '')
+        if name=='archive.html': text=text.replace('<title>Studies |', '<title>Archive |').replace('>Studies &amp; Reports</h1>', '>Archive</h1>')
         if not re.search(r'<meta\s+name=[\"\']description',text,re.I):
             text=re.sub(r'</head>',f'<meta name="description" content="{esc(dict(zip(PAGES,LABELS))[name])} — Academic portfolio of Seung-Mok Oh, Sogang University.">\n</head>',text,count=1,flags=re.I)
         if not re.search(r'<link\s+rel=[\"\']canonical',text,re.I):text=re.sub(r'</head>',f'<link rel="canonical" href="{BASE}{"/" if name=="index.html" else "/"+name}">\n</head>',text,count=1,flags=re.I)
@@ -97,7 +106,7 @@ def build(root,out,fixture=None):
         write(target,text)
     items=[]
     for post in posts:
-        id=str(uuid.UUID(post['id']));title=str(post['title']);category=str(post.get('category') or 'General');date=str(post['created_at'])[:10];updated=post.get('updated_at') or post['created_at'];path=f'/posts/{id}/';add(path,updated)
+        id=str(uuid.UUID(post['id']));title=str(post['title']);category=str(post.get('category') or 'General');date=kst_date(post['created_at']);updated=post.get('updated_at') or post['created_at'];path=f'/posts/{id}/';add(path,updated)
         if post.get('content_format')=='html':body=safe_html(post['body'],url);klass='post-body rich-content';desc=clean_text(body)[:155]
         else: body=esc(post['body']);klass='post-body';desc=' '.join(post['body'].split())[:155]
         desc=desc or title
