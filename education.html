@@ -45,6 +45,7 @@
         .edu-item:last-child { margin-bottom: 0; }
         .details { list-style-position: outside; padding-left: 1.2rem; }
         .award-item + .award-item { margin-top: 1.3rem; padding-top: 1.3rem; border-top: 1px solid var(--border-color); }
+        .award-date { white-space: nowrap; flex-shrink: 0; }
         .award-organization { font-size: 0.88rem; color: var(--text-muted); margin-top: 0.2rem; }
         .award-description { font-size: 0.9rem; color: #475569; margin-top: 0.4rem; }
         .section-intro { color: var(--text-muted); font-size: 0.9rem; margin: -0.4rem 0 1.25rem; }
@@ -125,7 +126,7 @@
 <header>
 <nav aria-label="Main navigation">
 <a class="logo" href="index.html">Seung-Mok Oh</a>
-<ul class="nav-links"><li><a href="index.html">Home</a></li><li><a aria-current="page" class="active" href="education.html">Education</a></li><li><a href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="extracurricular.html">Extracurricular</a></li><li><a href="studies.html">Studies</a></li><li><a href="board.html">Board</a></li></ul>
+<ul class="nav-links"><li><a href="index.html">Home</a></li><li><a aria-current="page" class="active" href="education.html">Education</a></li><li><a href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="extracurricular.html">Extracurricular</a></li><li><a href="archive.html">Archive</a></li><li><a href="board.html">Board</a></li></ul>
 </nav>
 </header>
 <main class="container">
@@ -150,12 +151,18 @@
 <section aria-labelledby="awards-title" class="card">
 <h2 class="section-title" id="awards-title">Honors &amp; Awards</h2>
 <div class="award-item">
+<div class="edu-header">
 <h3 class="degree">Dean’s List</h3>
+<time class="date award-date" datetime="2025-02-11">2025.02.11</time>
+</div>
 <p class="award-organization">Sogang University</p>
 <p class="award-description">Ranked 1st among all students in the Department of Biological Sciences.</p>
 </div>
 <div class="award-item">
+<div class="edu-header">
 <h3 class="degree">The 26th Biotechnology Competition</h3>
+<time class="date award-date" datetime="2026-10-08">2026.10.08</time>
+</div>
 <p class="award-organization">Korean Institute of Chemical Engineers (KIChE) · Sponsored by LG Chem</p>
 <p class="award-description">Honorable Mention Award</p>
 </div>
