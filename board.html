@@ -132,8 +132,9 @@
     <button type="button" class="btn" id="writeBtn" hidden>Write Post</button>
   </div></div>
   <p class="board-intro">A space for updates, notes, and thoughts.</p>
-  <div id="setupNotice" class="notice" hidden><p>The public board is not connected yet. Local preview is available for testing on this device only.</p><button id="demoBtn" class="btn secondary" type="button">Try Local Preview</button></div>
-  <div id="demoNotice" class="notice" hidden>Local preview · Posts and views are stored in this browser only. They are not published online.</div>
+  <noscript><p class="notice">JavaScript is required to use the board.</p></noscript>
+  <div id="setupNotice" class="notice" hidden><p>The board is not available yet. Please check back later.</p></div>
+
   <div id="status" class="status" role="status" aria-live="polite" hidden></div>
   <form id="loginForm" class="form-panel" hidden><h2>Administrator Login</h2>
     <label class="field">Email<input type="email" id="email" autocomplete="username" required></label>
