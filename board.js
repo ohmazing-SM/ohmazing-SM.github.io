@@ -37,10 +37,10 @@
   }
   async function listPosts() {
     const sequence = ++loadSeq;
-    panel('listPanel'); current = null; editing = null;
+    panel('listPanel'); document.title='Board | Seung-Mok Oh'; current = null; editing = null;
     const query = $('searchInput').value.trim();
     let rows, count;
-    let req = db.from('board_posts').select('id,title,created_at,views',{count:'exact'}).order('created_at',{ascending:false}).order('id',{ascending:false});
+    let req = db.from('board_posts').select('id,title,created_at,views,category,body,content_format',{count:'exact'}).order('created_at',{ascending:false}).order('id',{ascending:false});
     if(query) req = req.ilike('title',`%${query.replace(/[\\%_]/g,'\\$&')}%`);
     const res = checked(await req.range(page*PAGE_SIZE,(page+1)*PAGE_SIZE-1)); rows = res.data; count = res.count || 0;
     if(sequence !== loadSeq) return;
@@ -53,10 +53,12 @@
       const sub = document.createElement('p'); sub.className = 'empty-sub'; sub.textContent = query ? 'Try a different search.' : 'New posts will appear here.';
       empty.append(heading,sub); root.append(empty);
     } else for(const post of rows) {
-      const row = document.createElement('button'); row.type = 'button'; row.className = 'post-row';
+      const row = document.createElement('a'); row.href='board.html?post='+encodeURIComponent(post.id); row.className = 'post-row';
       const title = document.createElement('span'); title.className = 'post-title'; title.textContent = post.title;
       const info = document.createElement('span'); info.className = 'post-meta'; info.textContent = meta(post);
-      row.append(title,info); row.addEventListener('click',() => { setRoute(post.id); showRoute().catch(report); }); root.append(row);
+      const category=document.createElement('span');category.className='category-label';category.textContent=post.category||'General';title.prepend(category);
+      if(post.content_format==='html' && window.DOMPurify){const image=BoardContent.clean(post.body).querySelector('img');if(image){image.className='post-thumb';image.removeAttribute('width');image.loading='lazy';row.append(image);}}
+      row.append(title,info); row.addEventListener('click',e => {if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();setRoute(post.id);showRoute().catch(report);}); root.append(row);
     }
     const pages = Math.max(1,Math.ceil(count/PAGE_SIZE));
     $('pagination').hidden = pages <= 1; $('pageLabel').textContent = `${page+1} / ${pages}`; $('prevBtn').disabled = page === 0; $('nextBtn').disabled = page+1 >= pages;
@@ -64,12 +66,12 @@
   async function readPost(id, countView = true, sequence = routeSeq) {
     if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) throw new Error('Post not found.');
     let post;
-    if(countView) checked(await db.rpc('board_record_view',{post_id:id}));
-    post = checked(await db.from('board_posts').select('id,title,body,created_at,updated_at,views').eq('id',id).maybeSingle()).data;
+    if(countView) {try{await BoardViews.record(db,id);}catch(err){console.warn('View count unavailable',err);}}
+    post = checked(await db.from('board_posts').select('id,title,body,created_at,updated_at,views,category,content_format').eq('id',id).maybeSingle()).data;
     if(sequence !== routeSeq) return;
     if(!post) { setRoute(null); await listPosts(); throw new Error('Post not found.'); }
     current = post; editing = null; panel('articlePanel');
-    $('articleTitle').textContent = post.title; $('articleMeta').textContent = meta(post); $('articleBody').textContent = post.body; controls();
+    document.title=post.title+' | Seung-Mok Oh'; $('articleTitle').textContent=post.title; $('articleMeta').textContent=(post.category||'General')+' · '+meta(post); BoardContent.render($('articleBody'),post); controls();
   }
   async function showRoute() {
     const sequence = ++routeSeq; ++loadSeq; status(); $('loginForm').hidden = true;
@@ -79,19 +81,19 @@
     if(!admin) return;
     ++routeSeq; ++loadSeq; status(); $('loginForm').hidden = true;
     editing = post?.id || null; $('editorHeading').textContent = post ? 'Edit Post' : 'Write Post';
-    $('titleInput').value = post?.title || ''; $('bodyInput').value = post?.body || ''; $('publishBtn').textContent = post ? 'Save Changes' : 'Publish'; panel('editor'); $('titleInput').focus();
+    if(!window.DOMPurify){status('Editor protection library unavailable. Reload the page.',true);return;} BoardEditor.open(post,db,status); $('publishBtn').textContent = post ? 'Save Changes' : 'Publish'; panel('editor'); $('titleInput').focus();
   }
   $('editor').addEventListener('submit',e => {
     e.preventDefault(); if(!admin) return;
     guarded($('publishBtn'), async () => {
-      const title = $('titleInput').value.trim(), body = $('bodyInput').value.trim(); if(!title || !body) throw new Error('Enter a title and content.');
+      const title = $('titleInput').value.trim(), body = BoardEditor.value(), category=$('categoryInput').value.trim(); if(!title || !body || !category) throw new Error('Enter a title, category and content.'); if(body.length>50000)throw new Error('Post content exceeds 50,000 characters.'); const payload={title,body,category,content_format:'html'};
       let id = editing;
       if(id) {
-        checked(await db.from('board_posts').update({title,body}).eq('id',id).select('id').single());
+        checked(await db.from('board_posts').update(payload).eq('id',id).select('id').single());
       } else {
-        id = checked(await db.from('board_posts').insert({title,body}).select('id').single()).data.id;
+        id = checked(await db.from('board_posts').insert(payload).select('id').single()).data.id;
       }
-      if(postId()!==id) setRoute(id); await readPost(id,false,++routeSeq); status('Post saved.');
+      if(!editing) BoardEditor.clearDraft(); if(postId()!==id) setRoute(id); await readPost(id,false,++routeSeq); status('Post saved.');
     });
   });
   $('deleteBtn').addEventListener('click',() => { if(!admin || !current || !confirm('Delete this post permanently?')) return;
