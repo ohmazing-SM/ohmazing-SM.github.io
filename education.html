@@ -116,13 +116,16 @@
 
         .prof-link { color: var(--text-muted); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; transition: color 0.2s; }
         .prof-link:hover { color: var(--accent-color); }
+        @media (max-width: 600px) { .nav-links li:last-child { grid-column: 2; } }
+        .coursework-status { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.4rem; }
+        .coursework-status-later { margin-top: 1rem; }
 </style>
 </head>
 <body>
 <header>
 <nav aria-label="Main navigation">
 <a class="logo" href="index.html">Seung-Mok Oh</a>
-<ul class="nav-links"><li><a href="index.html">Home</a></li><li><a aria-current="page" class="active" href="education.html">Education</a></li><li><a href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="extracurricular.html">Extracurricular</a></li><li><a href="studies.html">Studies</a></li></ul>
+<ul class="nav-links"><li><a href="index.html">Home</a></li><li><a aria-current="page" class="active" href="education.html">Education</a></li><li><a href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="extracurricular.html">Extracurricular</a></li><li><a href="studies.html">Studies</a></li><li><a href="board.html">Board</a></li></ul>
 </nav>
 </header>
 <main class="container">
@@ -154,15 +157,16 @@
 <div class="award-item">
 <h3 class="degree">The 26th Biotechnology Competition</h3>
 <p class="award-organization">Korean Institute of Chemical Engineers (KIChE) · Sponsored by LG Chem</p>
-<p class="award-description"><strong>Honorable Mention Award</strong></p>
+<p class="award-description">Honorable Mention Award</p>
 </div>
 </section>
 <section aria-labelledby="coursework-title" class="card">
 <h2 class="section-title" id="coursework-title">Related Coursework</h2>
-<p class="section-intro">Department of Chemical and Biomolecular Engineering</p>
 <div class="coursework-grid">
-<div><h3 class="group-label">Completed</h3><ul class="skill-list"><li>Physical Chemistry</li><li>Thermodynamics</li><li>Engineering Mathematics</li><li>Fluid Mechanics</li><li>Chemical Reaction Engineering</li><li>Fermentation Engineering</li></ul></div>
-<div><h3 class="group-label">In Progress</h3><ul class="skill-list"><li>Semiconductor Processing</li><li>Heat and Mass Transfer</li><li>Biochemical Engineering</li></ul></div>
+<div><h3 class="group-label">Biological Sciences</h3><ul class="skill-list"><li>Biochemistry I &amp; II</li><li>Cell Biology</li><li>Plant Biology</li><li>Molecular Biology</li><li>Bioorganic Chemistry</li><li>Animal Metabolism</li><li>Immunology</li><li>Modern Biology Laboratory I–IV</li></ul></div>
+<div><h3 class="group-label">Chemical and Biomolecular Engineering</h3>
+<p class="coursework-status">Completed</p><ul class="skill-list"><li>Physical Chemistry</li><li>Thermodynamics</li><li>Chemical Reaction Engineering</li><li>Fluid Mechanics</li><li>Fermentation Engineering</li><li>Engineering Mathematics I &amp; II</li></ul>
+<p class="coursework-status coursework-status-later">In Progress</p><ul class="skill-list"><li>Biochemical Engineering</li><li>Heat and Mass Transfer</li><li>Semiconductor Processing</li></ul></div>
 </div>
 </section>
 <section aria-labelledby="skills-title" class="card">
