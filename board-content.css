@@ -1,0 +1,27 @@
+.rich-tools { display:flex; flex-wrap:wrap; gap:.4rem; padding:.65rem; background:#f8fafc; border:1px solid #cbd5e1; border-radius:7px 7px 0 0; }
+.rich-tools button,.rich-tools select,.rich-tools input { font:inherit; font-size:.8rem; background:#fff; color:#334155; border:1px solid #cbd5e1; border-radius:4px; padding:.3rem .55rem; cursor:pointer; }
+.rich-tools input[type=color]{width:2.2rem;height:1.95rem;padding:.15rem;}
+.rich-tools button:hover { border-color:#2563eb; color:#2563eb; }
+.rich-editor { min-height:20rem; border:1px solid #cbd5e1; border-top:0; border-radius:0 0 7px 7px; padding:1rem; outline:none; background:#fff; }
+.rich-editor:focus { border-color:#2563eb; }
+.rich-editor:empty::before { content:'Write your post here…'; color:#94a3b8; pointer-events:none; }
+.rich-content { white-space:normal; overflow-wrap:anywhere; line-height:1.85; font-size:.95rem; color:#334155; }
+.rich-content p,.rich-content div:not(.math-block) { margin:.55rem 0; }
+.rich-content h2,.rich-content h3,.rich-content h4 { line-height:1.4; color:#1e293b; margin:1.25rem 0 .6rem; }
+.rich-content h2 { font-size:1.3rem; } .rich-content h3 { font-size:1.12rem; } .rich-content h4 { font-size:1rem; }
+.rich-content ul,.rich-content ol { margin:.55rem 0 .8rem 1.6rem; }
+.rich-content img { max-width:100%; height:auto; display:inline-block; vertical-align:middle; border-radius:4px; }
+.rich-content table { border-collapse:collapse; max-width:100%; margin:1rem 0; display:block; overflow-x:auto; }
+.rich-content td,.rich-content th { border:1px solid #cbd5e1; min-width:70px; padding:.5rem .7rem; vertical-align:top; }
+.rich-content th { background:#f1f5f9; font-weight:650; }
+.rich-content pre { background:#f1f5f9; border-radius:6px; padding:.9rem; overflow:auto; white-space:pre-wrap; }
+.rich-content blockquote { border-left:3px solid #cbd5e1; padding-left:.9rem; color:#64748b; margin:.9rem 0; }
+.rich-content a { color:#2563eb; text-underline-offset:3px; }
+.rich-content .math-block { overflow-x:auto; margin:.9rem 0; }
+.rich-editor .math-inline,.rich-editor .math-block { font-family:monospace; background:#eff6ff; color:#1d4ed8; padding:.15rem .35rem; border-radius:3px; }
+.rich-editor .math-block { display:block; padding:.6rem; }
+.editor-help { font-size:.8rem; color:#64748b; margin:.6rem 0 1rem; }
+.post-row { text-decoration:none; }
+.post-thumb { width:66px; height:52px; flex-shrink:0; object-fit:cover; border-radius:5px; }
+.category-label { color:#64748b; font-size:.75rem; font-weight:500; display:block; }
+@media(max-width:600px){.post-thumb{width:64px;height:48px;} .rich-tools{gap:.3rem;} }
