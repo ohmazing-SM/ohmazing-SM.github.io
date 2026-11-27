@@ -120,6 +120,17 @@
         }
 
         @media (max-width: 600px) { .nav-links li:last-child { grid-column: 2; } }
+
+        /* Expandable supporting documents */
+        .evidence-toggle { font: inherit; color: inherit; border: 0; padding: 0; background: none; cursor: pointer; text-align: left; }
+        .evidence-label { text-decoration: underline; text-underline-offset: 3px; }
+        .evidence-toggle:hover { color: var(--accent-color); }
+        .evidence-state { display: inline-block; margin-left: 0.45rem; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-decoration: none; }
+        .evidence-viewer { margin-top: 1rem; }
+        .evidence-viewer[hidden] { display: none !important; }
+        .evidence-viewer iframe { display: block; width: 100%; height: min(700px, 75vh); min-height: 320px; border: 1px solid var(--border-color); border-radius: 8px; background: #fff; }
+        .concert-link { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+        .concert-link:hover { color: var(--accent-color); }
 </style>
 </head>
 <body>
@@ -130,10 +141,29 @@
 </nav>
 </header>
 <main class="container"><section class="card"><h1 class="section-title">Extracurricular Activities</h1><article class="project-item"><div class="project-header"><h2 class="project-title">Alpha Sigma Nu</h2><span class="project-date">2026.10 – Present</span></div><p class="project-lab">Honor Society of Jesuit Institution</p><p class="activity-role">Inductee (49th Cohort), Sogang University Chapter</p></article>
-<article class="project-item"><div class="project-header"><h2 class="project-title">National Undergraduate Symposium on Biology (NusB)</h2><span class="project-date">2025.07 – 2025.08</span></div><p class="project-lab">Seoul/Metropolitan Division 1</p><ul class="project-bullets"><li>Delivered an oral presentation reviewing “Stochasticity and Determinism in Cell Fate Decision” and conducted the interactive Q&amp;A session.</li></ul></article>
-<article class="project-item"><div class="project-header"><h2 class="project-title">Sogang Chorus</h2><span class="project-date">2024.09 – 2025.02</span></div><p class="project-lab">Sogang University</p><p class="activity-role">Accompanist (Pianist)</p><ul class="project-bullets"><li>Featured as the official pianist for an invited special performance at the Sogang University Alumni Association New Year’s Gala.</li></ul></article>
+<article class="project-item"><div class="project-header"><h2 class="project-title"><button type="button" class="evidence-toggle" aria-expanded="false" aria-controls="nusb-evidence"><span class="evidence-label">National Undergraduate Symposium on Biology (NusB)</span><span class="evidence-state" aria-hidden="true">View</span></button></h2><span class="project-date">2025.07 – 2025.08</span></div><p class="project-lab">Seoul/Metropolitan Division 1</p><ul class="project-bullets"><li>Delivered an oral presentation reviewing “Stochasticity and Determinism in Cell Fate Decision” and conducted the interactive Q&amp;A session.</li></ul>
+<div class="evidence-viewer" id="nusb-evidence" hidden>
+<iframe data-src="https://drive.google.com/file/d/1zYbXjENfJN_y6yYPZWOJhUxR3UB52HoU/preview" title="National Undergraduate Symposium on Biology (NusB) — supporting document" loading="lazy" allowfullscreen></iframe>
+</div></article>
+<article class="project-item"><div class="project-header"><h2 class="project-title">Sogang Chorus</h2><span class="project-date">2024.09 – 2025.02</span></div><p class="project-lab">Sogang University</p><p class="activity-role">Accompanist (Pianist)</p><ul class="project-bullets"><li>Performed as the piano accompanist for nine pieces at the <a class="concert-link" href="https://www.youtube.com/watch?v=DZuEn1j9xn0" target="_blank" rel="noopener noreferrer">59th Regular Concert</a>.</li><li>Featured as the official pianist for an invited special performance at the Sogang University Alumni Association New Year’s Gala.</li></ul></article>
 <article class="project-item"><div class="project-header"><h2 class="project-title">Student Council, College of Natural Sciences</h2><span class="project-date">2024.04 – 2024.12</span></div><p class="project-lab">Sogang University</p><p class="activity-role">Member of Event Planning Committee</p><ul class="project-bullets"><li>Conceptualized the booth themes for both spring and fall campus festivals.</li></ul></article>
 <article class="project-item"><div class="project-header"><h2 class="project-title">Republic of Korea Air Force</h2><span class="project-date">2022.07 – 2024.02</span></div><p class="project-lab">Personnel Administration Branch, Service Support Group, AFOC, Osan Air Base</p><p class="activity-role">Administrative Clerk</p><ul class="project-bullets"><li>Established standardized operating protocols (SOPs) for administrative workflows and automated daily personnel reporting systems by developing custom Excel VBA macros.</li></ul></article>
 </section></main>
+<script>
+        document.addEventListener('click', function (event) {
+            const button = event.target.closest('button.evidence-toggle');
+            if (!button) return;
+            const viewer = document.getElementById(button.getAttribute('aria-controls'));
+            if (!viewer) return;
+            const opening = viewer.hidden;
+            if (opening) {
+                const frame = viewer.querySelector('iframe[data-src]');
+                if (frame && !frame.getAttribute('src')) frame.setAttribute('src', frame.dataset.src);
+            }
+            viewer.hidden = !opening;
+            button.setAttribute('aria-expanded', String(opening));
+            button.querySelector('.evidence-state').textContent = opening ? 'Hide' : 'View';
+        });
+</script>
 </body>
 </html>
