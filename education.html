@@ -120,6 +120,15 @@
         @media (max-width: 600px) { .nav-links li:last-child { grid-column: 2; } }
         .coursework-status { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; margin-bottom: 0.4rem; }
         .coursework-status-later { margin-top: 1rem; }
+
+        /* Expandable supporting documents */
+        .evidence-toggle { font: inherit; color: inherit; border: 0; padding: 0; background: none; cursor: pointer; text-align: left; }
+        .evidence-label { text-decoration: underline; text-underline-offset: 3px; }
+        .evidence-toggle:hover { color: var(--accent-color); }
+        .evidence-state { display: inline-block; margin-left: 0.45rem; font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-decoration: none; }
+        .evidence-viewer { margin-top: 1rem; }
+        .evidence-viewer[hidden] { display: none !important; }
+        .evidence-viewer iframe { display: block; width: 100%; height: min(700px, 75vh); min-height: 320px; border: 1px solid var(--border-color); border-radius: 8px; background: #fff; }
 </style>
 </head>
 <body>
@@ -152,19 +161,25 @@
 <h2 class="section-title" id="awards-title">Honors &amp; Awards</h2>
 <div class="award-item">
 <div class="edu-header">
-<h3 class="degree">Dean’s List</h3>
+<h3 class="degree"><button type="button" class="evidence-toggle" aria-expanded="false" aria-controls="deans-list-evidence"><span class="evidence-label">Dean’s List</span><span class="evidence-state" aria-hidden="true">View</span></button></h3>
 <time class="date award-date" datetime="2025-02-11">2025.02.11</time>
 </div>
 <p class="award-organization">Sogang University</p>
 <p class="award-description">Ranked 1st among all students in the Department of Biological Sciences.</p>
+<div class="evidence-viewer" id="deans-list-evidence" hidden>
+<iframe data-src="https://drive.google.com/file/d/1Y86sDuPye56QrKg-MOniUFrQg0MTz4dh/preview" title="Dean’s List — supporting document" loading="lazy" allowfullscreen></iframe>
+</div>
 </div>
 <div class="award-item">
 <div class="edu-header">
-<h3 class="degree">The 26th Biotechnology Competition</h3>
+<h3 class="degree"><button type="button" class="evidence-toggle" aria-expanded="false" aria-controls="biotechnology-competition-evidence"><span class="evidence-label">The 26th Biotechnology Competition</span><span class="evidence-state" aria-hidden="true">View</span></button></h3>
 <time class="date award-date" datetime="2026-10-08">2026.10.08</time>
 </div>
 <p class="award-organization">Korean Institute of Chemical Engineers (KIChE) · Sponsored by LG Chem</p>
 <p class="award-description">Honorable Mention Award</p>
+<div class="evidence-viewer" id="biotechnology-competition-evidence" hidden>
+<iframe data-src="https://drive.google.com/file/d/1pmV3xvSNYvWzSWQa-hKe3zyaXXPSVedr/preview" title="The 26th Biotechnology Competition — supporting document" loading="lazy" allowfullscreen></iframe>
+</div>
 </div>
 </section>
 <section aria-labelledby="coursework-title" class="card">
@@ -207,5 +222,21 @@
 </section>
 </section>
 </main>
+<script>
+        document.addEventListener('click', function (event) {
+            const button = event.target.closest('button.evidence-toggle');
+            if (!button) return;
+            const viewer = document.getElementById(button.getAttribute('aria-controls'));
+            if (!viewer) return;
+            const opening = viewer.hidden;
+            if (opening) {
+                const frame = viewer.querySelector('iframe[data-src]');
+                if (frame && !frame.getAttribute('src')) frame.setAttribute('src', frame.dataset.src);
+            }
+            viewer.hidden = !opening;
+            button.setAttribute('aria-expanded', String(opening));
+            button.querySelector('.evidence-state').textContent = opening ? 'Hide' : 'View';
+        });
+</script>
 </body>
 </html>
