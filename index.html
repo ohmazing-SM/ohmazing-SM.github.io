@@ -200,13 +200,11 @@
                 gap: 1rem;
             }
         }
-    
 
-        .current-research { margin-top: 2rem; }
-        .current-research-title { font-size: 0.98rem; font-weight: 650; color: var(--primary-color); line-height: 1.6; }
-        .current-research-meta { font-size: 0.82rem; color: var(--text-muted); margin: 0.55rem 0; }
-        .current-research-text { font-size: 0.9rem; color: #475569; margin-bottom: 0.9rem; }
-        .research-link { color: #1d4ed8; font-size: 0.88rem; font-weight: 600; text-underline-offset: 3px; }
+
+
+
+
 
 
 
@@ -242,6 +240,7 @@
             *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; }
         }
 
+        @media (max-width: 600px) { .nav-links li:last-child { grid-column: 2; } }
 </style>
 </head>
 <body>
@@ -249,7 +248,7 @@
 <header>
 <nav aria-label="Main navigation">
 <a class="logo" href="index.html">Seung-Mok Oh</a>
-<ul class="nav-links"><li><a aria-current="page" class="active" href="index.html">Home</a></li><li><a href="education.html">Education</a></li><li><a href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="extracurricular.html">Extracurricular</a></li><li><a href="studies.html">Studies</a></li></ul>
+<ul class="nav-links"><li><a aria-current="page" class="active" href="index.html">Home</a></li><li><a href="education.html">Education</a></li><li><a href="research.html">Research</a></li><li><a href="publications.html">Publications</a></li><li><a href="extracurricular.html">Extracurricular</a></li><li><a href="studies.html">Studies</a></li><li><a href="board.html">Board</a></li></ul>
 </nav>
 </header>
 <!-- Main Container -->
@@ -283,13 +282,6 @@
 <h2 class="section-title">Research Interests</h2>
 <div class="interest-tags"><span class="tag">Nanotechnology</span><span class="tag">Surface Engineering of Nanomaterials</span><span class="tag">Bio-applications of Nanoparticles</span></div>
 
-<div class="current-research">
-<h2 class="section-title">Current Research</h2>
-<p class="current-research-title">Machine Learning-Based Process Optimization of Custom Dip-Coated Quantum Dot Thin Films</p>
-<p class="current-research-meta">Sogang University · Prof. Moon-Sung Kang · 2026.09 – Present</p>
-<p class="current-research-text">Developing a custom dip-coating system and an experimental protocol for colloidal quantum dot deposition, with machine learning-based process optimization planned.</p>
-<a class="research-link" href="research.html">View research experience <span aria-hidden="true">→</span></a>
-</div>
 </section>
 </div>
 </main>
